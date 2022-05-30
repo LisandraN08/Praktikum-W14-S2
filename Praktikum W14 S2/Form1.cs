@@ -32,7 +32,7 @@ namespace Praktikum_W14_S2
         string teamID = "";
         private void Form1_Load(object sender, EventArgs e)
         {
-            sqlQuery = "SELECT t.team_id, t.team_name, m.manager_name, concat(t.home_stadium, ', ', t.city, '(',t.capacity,')') FROM team t, manager m, player p, dmatch d WHERE t.manager_id = m.manager_id and t.team_id = d.team_id GROUP BY 1;";
+            sqlQuery = "SELECT t.team_id, t.team_name, concat(m.manager_name,' (', n.nation, ')'), concat(t.home_stadium, ', ', t.city, '(',t.capacity,')') FROM team t, manager m, player p, dmatch d, nationality n WHERE t.manager_id = m.manager_id and t.team_id = d.team_id and m.nationality_id = n.nationality_id GROUP BY 1;";
             sqlCommand = new MySqlCommand(sqlQuery, sqlConnect);
             sqlAdapter = new MySqlDataAdapter(sqlCommand);
             sqlAdapter.Fill(dtTeam);
